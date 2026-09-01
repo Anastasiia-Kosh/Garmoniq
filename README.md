@@ -1,257 +1,126 @@
 # Harmoniq
 
-## Про проєкт
+![Головна сторінка Harmoniq](assets/harmoniq-preview.webp)
 
-**Harmoniq** — командний Fullstack-проєкт, який виконується в межах навчальної програми GoIT.
+**Harmoniq** — командний full-stack вебзастосунок, створений у межах навчальної програми GoIT. Це платформа для читання й публікації статей, пошуку авторів та взаємодії зі спільнотою.
 
-Мета команди — реалізувати проєкт відповідно до технічного завдання, дотримуючись єдиного процесу розробки, стандартів коду та правил командної взаємодії.
+[🌐 Демо](https://project-webcrafters-03-frontend.vercel.app) · [📦 Основний репозиторій](https://github.com/vitaliypolets/project-webcrafters-03)
 
----
-
-## Посилання
-
-### GitHub
-
-https://github.com/vitaliypolets/project-webcrafters-03.git
-
-### Демо проєкту
-
-https://project-webcrafters-03-frontend.vercel.app
-
-## Технологічний стек
-
-| Категорія          | Технології                                                        |
-| ------------------ | ----------------------------------------------------------------- |
-| Frontend           | HTML5, CSS3, TypeScript, React, Next.js (App Router), CSS Modules |
-| Frontend API Layer | Next.js Route Handlers (proxy/BFF до Express Backend)             |
-| Backend            | Node.js, Express, JavaScript                                      |
-| База даних         | MongoDB, Mongoose                                                 |
-| Робота з API       | REST API, Axios, TanStack Query                                   |
-| Авторизація        | JWT, Bcrypt                                                       |
-| Форми              | Formik                                                            |
-| Валідація          | Yup                                                               |
-| Global State       | Zustand                                                           |
-| Повідомлення       | react-hot-toast                                                   |
-| Upload             | Multer, Cloudinary                                                |
-| Інструменти        | Git, GitHub, npm, ESLint, Prettier, VS Code                       |
-| Дизайн             | Figma                                                             |
-| Деплой             | Vercel / Render                                                   |
-
-### Правила використання
-
-- Axios використовується у frontend service/API layer для запитів до `/api/...`.
-- TanStack Query використовується для server state, кешування та мутацій.
-- Next.js Route Handlers використовують `fetch` / `proxyToBackend` для проксіювання запитів до Express Backend.
-- Formik + Yup використовуються для форм та їх валідації.
-- Zustand використовується для глобального client state.
-- react-hot-toast використовується для toast-повідомлень.
-- `alert()` для повідомлень користувачу не використовується.
-- Multer + Cloudinary використовуються для завантаження зображень.
+> Цей репозиторій є fork оригінального командного проєкту.
 
 ---
 
-## Архітектура
+## ✨ Основні можливості
 
-Проєкт організований як monorepo та складається з двох основних частин:
-
-- frontend/ — Next.js застосунок на базі App Router;
-- backend/ — окремий REST API на Node.js та Express.
-
-Next.js Route Handlers розміщуються у frontend-частині та використовуються як proxy/BFF між клієнтською частиною застосунку та Express Backend.
-
-Express Backend відповідає за бізнес-логіку, авторизацію, роботу з даними та взаємодію з MongoDB через Mongoose.
-
-## Основні принципи
-
-- Використовується сучасний стек технологій для розробки Fullstack-застосунку.
-- Frontend реалізований на Next.js (App Router), а Backend — як окремий REST API на Node.js + Express.
-- Взаємодія між клієнтом і сервером здійснюється через REST API.
-- Контроль версій здійснюється за допомогою Git та GitHub.
-- Для забезпечення єдиного стилю коду використовуються ESLint і Prettier.
+- перегляд популярних статей і повного каталогу публікацій;
+- сторінки окремих статей та авторів;
+- реєстрація, авторизація і керування сесією;
+- створення, редагування та видалення власних статей;
+- додавання публікацій до закладок;
+- перегляд профілю та керування даними користувача;
+- завантаження зображень через Cloudinary;
+- адаптивний інтерфейс для мобільних пристроїв, планшетів і десктопів.
 
 ---
 
-## Документація
+## 👩‍💻 Мій внесок
 
-Перед початком роботи кожен учасник команди повинен ознайомитися з актуальними документами. Канонічні назви файлів:
+На цьому проєкті моєю зоною відповідальності були **AuthorsPage та загальні дані окремого автора**.
 
-| Документ | Призначення |
+### Frontend
+
+- реалізувала сторінку списку авторів за маршрутом `/authors`;
+- створила сторінку профілю автора `/authors/[userId]`;
+- розробила компоненти списку й картки автора, типи та API-сервіси;
+- реалізувала посторінкове завантаження авторів через `useInfiniteQuery`;
+- додала кешування та попереднє завантаження наступної сторінки за допомогою TanStack Query;
+- реалізувала кнопку **Load More**, стани завантаження й помилок та плавний перехід до нової порції даних;
+- використала `next/image` для аватарів і створила адаптивне оформлення сторінок;
+- додала Next.js Route Handler `/api/users/[userId]`, який працює як BFF-проксі до Express API.
+
+### Backend
+
+- реалізувала публічний endpoint `GET /api/users/:userId`;
+- створила окремий модуль `users/details` із route, controller, service і validation;
+- додала перевірку валідності MongoDB ObjectId;
+- реалізувала отримання основних даних користувача та підрахунок кількості його статей;
+- передбачила контрольовані відповіді для невалідного ID і відсутнього користувача.
+
+> Моя зона відповідальності охоплювала загальні дані автора. Список статей автора реалізовував інший учасник команди.
+
+---
+
+## 🧰 Технологічний стек
+
+| Частина | Технології |
 | --- | --- |
-| `README.md` | Загальна інформація про проєкт та навігація по документації |
-| `TEAM_RULES.md` | Правила роботи команди |
-| `GIT_WORKFLOW.md` | Git, Pull Request та production workflow |
-| `OWNERSHIP_MAP.md` | Канонічні ownership-зони та структура проєкту |
-| `API_CONTRACT.md` | Канонічні REST API endpoints, request/response contracts |
-| `API_CONVENTIONS.md` | Спільні HTTP/API conventions |
-| `DATABASE_ARTICLE_CONTRACT.md` | MongoDB/Mongoose Article contract і міграція legacy data |
-| `FRONTEND_LAYOUT_GUIDE.md` | Shared UI, layout, responsive та frontend integration rules |
-| `TL_MASTER_LIST.md` | Централізований TL/shared-core стан проєкту |
+| Frontend | Next.js 16, React 19, TypeScript, CSS Modules |
+| Робота з API | Axios, TanStack Query, Next.js Route Handlers |
+| Global State | Zustand |
+| Форми та валідація | Formik, Yup |
+| Backend | Node.js, Express 5, JavaScript |
+| База даних | MongoDB, Mongoose |
+| Авторизація | JWT, bcrypt |
+| Робота із зображеннями | Multer, Cloudinary, Next/Image |
+| Документація API | Swagger / OpenAPI |
+| Якість коду | ESLint, Prettier |
+| Деплой | Vercel, Render |
 
 ---
 
-## Початок роботи
+## 🏗️ Архітектура
 
-1. Ознайомитися з документацією.
-3. Створити власну feature-гілку.
-4. Розпочати виконання своєї задачі.
+Проєкт організований як monorepo з npm workspaces:
 
----
+- `frontend/` — застосунок на Next.js App Router;
+- `backend/` — окремий REST API на Node.js та Express.
 
-## Комунікація
+Клієнтська частина надсилає запити до `/api/...` через Axios. Next.js Route Handlers виконують роль proxy/BFF і передають запити до Express Backend. Сервер відповідає за бізнес-логіку, авторизацію та взаємодію з MongoDB через Mongoose.
 
-Основний канал комунікації команди — **Slack**.
-Резервний канал комунікації команди — **Telegram**.
-У разі виникнення питань щодо реалізації, архітектури або організації роботи необхідно звернутися до Team Lead або обговорити питання в командному чаті.
+TanStack Query використовується для server state, кешування й мутацій, а Zustand — для глобального client state.
 
 ---
 
-## Канонічний API та validation contract
+## 📚 Документація
 
-Базовий шлях Express Backend:
-
-```text
-/api
-```
-
-Канонічні правила:
-
-- API response використовує `id`; MongoDB `_id` залишається внутрішнім полем.
-- Для User API response використовується `avatarUrl`, а не змішані `avatar` / `avatarUrl`.
-- Невалідний MongoDB ObjectId повертає `400`.
-- Неавторизований private request повертає `401`.
-- Спроба змінити або видалити чужий ресурс повертає `403`.
-- Відсутній ресурс повертає `404`.
-- Upload/Multer validation errors повинні повертати контрольований `4xx`, а не `500`.
-- Private endpoint використовують Bearer access token через shared API client.
-- Frontend validation повинна відповідати Backend validation.
-
-### Pagination
-
-Канонічні назви:
-
-```text
-page
-perPage
-```
-
-Для:
-
-```text
-GET /api/users
-```
-
-використовуються:
-
-```text
-page
-perPage
-sort
-```
-
-`limit` не є частиною канонічного `/users` contract.
-
-Top Creators:
-
-```http
-GET /api/users?page=1&perPage=6&sort=articlesAmount
-```
-
-Для:
-
-```text
-GET /api/articles
-```
-
-поточна реалізація додатково підтримує `filter`, `authorId`, `excludeId` та `limit`.
-
-### Bookmarks
-
-Канонічне видалення закладки:
-
-```http
-DELETE /api/users/me/bookmarks/:articleId
-```
-
-`articleId` не передається у DELETE body.
-
-### Create Article
-
-Канонічний `multipart/form-data`:
-
-```text
-title             required, 3..48
-article           required, 100..4000
-publicationDate   required, YYYY-MM-DD
-image             required, JPEG/PNG/WEBP, max 1 MB
-```
-
-Клієнт не передає:
-
-```text
-authorId
-description
-category
-viewsCount
-imageUrl
-imagePublicId
-```
-
-Автор визначається з authenticated user.
-
-`description` формується Backend із `article`.
-
-### PATCH Article
-
-Client-editable fields:
-
-```text
-title
-article
-publicationDate
-image
-```
-
-Усі поля optional, але потрібно передати щонайменше одне поле або image.
-
-Якщо передано поле, воно використовує ті самі validation constraints, що й Create Article.
+- [API Contract](docs/API_CONTRACT.md)
+- [API Conventions](docs/API_CONVENTIONS.md)
+- [Ownership Map](docs/OWNERSHIP_MAP.md)
+- [Frontend Layout Guide](docs/FRONTEND_LAYOUT_GUIDE.md)
+- [Git Workflow](docs/GIT_WORKFLOW.md)
+- [Team Rules](docs/TEAM_RULES.md)
 
 ---
 
-## API Ownership
+## 🚀 Локальний запуск
 
-| Owner              | Endpoint                                                                        |
-| ------------------ | ------------------------------------------------------------------------------- |
-| №2                 | `POST /api/auth/register`, check-email mode                                     |
-| №3                 | `POST /api/auth/login`                                                          |
-| №4                 | `POST/DELETE /api/auth/session`                                                 |
-| №5                 | `GET/PATCH /api/users/me`                                                       |
-| №6                 | `GET /api/users`                                                                |
-| №7                 | `GET /api/users/:userId`                                                        |
-| №8                 | `GET /api/users/:userId/articles`                                               |
-| №9                 | `GET/POST /api/users/me/bookmarks`, `DELETE /api/users/me/bookmarks/:articleId` |
-| №10                | `GET /api/articles/:articleId`                                                  |
-| №11                | `GET /api/articles`                                                             |
-| №12                | `PATCH/DELETE /api/articles/:articleId`                                         |
-| №13                | `POST /api/articles`                                                            |
-| Team Lead / shared | `GET /api/health`, shared API/auth/validation infrastructure                    |
+1. Клонуйте репозиторій:
 
----
+```bash
+git clone https://github.com/Anastasiia-Kosh/Garmoniq.git
+cd Garmoniq
+```
 
-## Правило зміни контракту
+2. Встановіть залежності:
 
-Під час stabilization не можна одноосібно змінювати route, query parameter, body/FormData field, response field, validation rule або status code.
+```bash
+npm install
+```
 
-Порядок:
+3. Створіть локальні файли змінних середовища на основі:
 
-2. Звірити правило з фактичним `develop`.
-3. Розбіжність погодити з Team Lead до реалізації.
-4. Після погодження синхронно оновити Backend, Frontend, shared types, QA cases та документацію.
-5. Не додавати aliases або дублікати параметрів лише для сумісності із застарілою документацією.
+- `frontend/.env.example`;
+- `backend/.env.example`.
 
----
+4. Запустіть frontend і backend одночасно:
 
-## Актуальність документації
+```bash
+npm run dev
+```
 
-Документація є частиною проєкту.
+Окремий запуск:
 
-У разі зміни процесів розробки або архітектури відповідні документи будуть оновлятися.
+```bash
+npm run dev:frontend
+npm run dev:backend
+```
