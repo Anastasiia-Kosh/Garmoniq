@@ -124,3 +124,7 @@ npm run dev
 npm run dev:frontend
 npm run dev:backend
 ```
+
+# Макет
+
+[Figma](https://www.figma.com/design/tWO4RvXS2zFhL9keRcNJtb/Harmoniq?node-id=6-39&p=f&t=FNQA1ISKPXym9aTV-0)
